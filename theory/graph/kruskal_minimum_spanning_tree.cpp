@@ -39,6 +39,10 @@ int find(subset subsets[], int i){
 void Union(subset subsets[], int x, int y){
     int xroot = find(subsets, x);
     int yroot = find(subsets, y);
+
+    if (xroot == yroot){
+        return;
+    }
     if(subsets[x].parent != subsets[y].parent){
         if(subsets[x].rank > subsets[y].rank){
             subsets[y].parent = x;
@@ -73,7 +77,7 @@ void kruskalMST(Graph* graph){
 
     int r=0;  // Keeping track of the edge index of result
     int e=0;  // keeping track of explored edges
-
+ 
     qsort(graph->edge, graph->E, sizeof(graph->edge[0]), compare);
 
     subset* subsets = new subset[V];
